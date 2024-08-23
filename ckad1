@@ -1,0 +1,18 @@
+in exam ctrl+shift+c = copy
+ 
+ssh ckad123
+kubectl get ns > /opt/namespaces  # get namespaces and save them in a file
+
+WE ARE GOING TO USE HELM
+helm -n mercury ls   ### 
+helm repo list       ### list repo
+helm -n mercury uninstall internal-issue-report-apiv1    ### deleted repo
+helm repo update                                         ### best practice to update the all repo 
+helm search repo nginx                                    ### search for  repo  with nginx 
+helm -n mercury upgrade internal-issue-report-apiv2
+helm -n mercury instal internal-issue-report-api --set ReplicateCount=2
+
+By default Helm only shows deployed states, to see pending state we use ls -a  to see the pending... 
+  helm -n mercury ls -a 
+  helm -n mercury uninstall interal-issue-reportdel
+  
