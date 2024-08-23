@@ -1,0 +1,6 @@
+export now='--grace-period=0 --force'      ### terminate pod immediately
+export dr='--dry-run=client -o yaml'       ### helps with speeding up command execution 
+kubectl config context -o name
+kubectl config current-context 
+echo "cat ~./kube/config | grep -i current-context | sed/curent-context: // " > opt/doc/text.sh
+
