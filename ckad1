@@ -51,3 +51,19 @@ readinessProbe:
 kubectl get pods 
 
 
+
+@@@@@####### #############@@@@@@@@@@@@@
+kubectl get all -n saturn ## get all from the saturn namespace
+kubectl get all -n saturn -o yaml | grep -i my-app-shop -A 3 -B 3
+
+this should give us the pod we are interested in 
+
+kubectl get pods webserver-oil3 -n saturn -o yaml > 7.yaml
+
+vi 7.yaml 
+kubectl create -f 7.yaml
+
+
+
+
+
