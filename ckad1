@@ -3,7 +3,8 @@ in exam ctrl+shift+c = copy
 ssh ckad123
 kubectl get ns > /opt/namespaces  # get namespaces and save them in a file
 
-WE ARE GOING TO USE HELM
+##### @@@@@ WE ARE GOING TO USE HELM ##### @@@@@@@@@@@@@@
+
 helm -n mercury ls   ### 
 helm repo list       ### list repo
 helm -n mercury uninstall internal-issue-report-apiv1    ### deleted repo
@@ -13,6 +14,25 @@ helm -n mercury upgrade internal-issue-report-apiv2
 helm -n mercury instal internal-issue-report-api --set ReplicateCount=2
 
 By default Helm only shows deployed states, to see pending state we use ls -a  to see the pending... 
-  helm -n mercury ls -a 
-  helm -n mercury uninstall interal-issue-reportdel
-  
+helm -n mercury ls -a 
+helm -n mercury uninstall interal-issue-reportdel
+
+
+###@@  WE ARE USING JOBS  #### Jobs run once and stop    -------------   Cron jobs run periodically @@@@@@@@@@@@
+
+kubectl get pods job -A
+kubectl create job -n neptune nep-new-job --image=busybox:1.31.0 --label-id=awesome-job --dry-run=client -o yaml 
+> /opt/course/3/job.yaml 
+vi /opt/course/3/job.yaml 
+
+change name of the container
+check metadata section for labels
+under spec add parralellism and completion data 2 3 respectively
+add command: sh -c sleep 2 && echo done
+  save and exit vi
+kubectl create -f  /opt/course/3/job.yaml 
+
+
+
+
+
