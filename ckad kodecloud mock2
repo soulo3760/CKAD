@@ -1,0 +1,37 @@
+you cant go back and change the beginning, but you can start where you are and change the ending.
+
+clear
+cat /etc/kubernetes.manifests/kube-apiserver.yaml | grep -i etcd
+
+ETCDCTL_API=3 etcdctl --cacert=<> --endpoints= --cert=<>--key=  >  snapshot save /opt/etcd-backup.db
+etcdl snapshot status /opt/etcd-backup.db  ## add \ >
+
+@@######   #####@@@@@@@
+
+kubectl run redis-storage --image=redis:alpine 
+##look up kubernetes documentation on emptyDir
+apiVersion: v1
+kind: pod
+metadata:
+ name: redis-storage
+spec:
+ containers:
+   -image:redis:alpine 
+  volumes:
+    -name: emptDir
+     emptyDir:
+kubectl apply -f 1.yaml
+kubectl get pods
+
+   ####@@@ -------  @@@@#####
+kubectl run super-user-pod --image=busybox:1.28 --command -- sleep=4800
+  or use documentation to edit 
+1. command: ['sh','-c','sleep 4800']
+2. the securitycontext: capabilities: add:['SYS_TIME']
+
+kubectl apply -f system.yaml
+kubectl gep pods
+
+  
+  
+  
