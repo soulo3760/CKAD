@@ -26,6 +26,24 @@ kubectl run temp-bus -n finance --image=redis:alpine
 kubectl get pods -n finance
 
 
+kubectl get nodes
+kubectl get pods
+
+kubectl expose deployment hr-web-app --type=NodePort
+--name=hr-web-app-service --port=80
+--target-port=80 --node-port=30082
+
+kubectl expose - command used to create a service resource 
+Breakdown of the Command
+kubectl expose: The command used to create a Service resource.
+
+deployment hr-web-app: type of resource to expose in this case deployment by this name/
+--type=NodePort: service of the type NodePort  which exposes the service on a static port on each node
+--name=hr-web-app-service: name of service to hr-web-app-service 
+--port=80: specifies the port that the service will expose, service will listen on this port 
+--target-port=80 specifies pods where the application is running, service will forward traffic from the --port to this --target
+--node-port=30082 the port on each node that the service will use, you will access your application at this port on any node in your cluster 
+
 kubectl describe pod orange
 kubectl edit pod orange
 kubectl apply -f orange.txt
