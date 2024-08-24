@@ -30,8 +30,102 @@ kubectl run super-user-pod --image=busybox:1.28 --command -- sleep=4800
 2. the securitycontext: capabilities: add:['SYS_TIME']
 
 kubectl apply -f system.yaml
-kubectl gep pods
+################@@@@@@@@@@@@@@@@ ____________________  _____________   @@@@@@@@@@@@@@@@@@@####################
+kubectl get pods
+kubectl get pv
+PersistentVolument claims
+vi pvc.yamnl
 
+apiVersion:v1
+kind:PersistentVolumeClaim
+metadat:
+  name: my-pvc
+spec:
+  accessModes:
+    -ReadWriteOnce
+   volumeMode: Filesystem
+   resources:
+     requests:
+       storage: 10Mi
+
+on the PV 
+vi /root/use.pv.yaml
+
+apiVersion: v1
+kind: pod
+metadata:
+  label: 
+     run: use-pv
+     name: use-pv
+spec:
+ containers:
+  -image: nginx
+   name: use-pv
+   volumeMounts:
+      -MountPath: "/data"
+       name: mypd
+volumes:
+  -name: mypd
+   persistentVolumeClaim:
+     claimName: my-pvc
+
+
+kubectl apply -f  /root/use.pv.yaml
+kubectl apply -f pvc.yaml
+kubectl get pvc 
+kubectl get pods
+kubectl get pv
   
-  
-  
+###$$$$$$$$$$$@@@@@@@  $$$$$$#########@@@@@@@@
+
+kubectl get deployment nginx-deploy -oyaml
+kubectl set image deployment/nginx-deploy nginx=nginx:1.16 --update
+kubectl get pods 
+clear
+
+###$$$$$$$@@@@@@@@@  $$$$$$$$$###########@@@@@@@@@@@@@@
+user with perimission to create, list get update and delete pods
+private keys exists in : /root/CKA/john.key
+csr at: /root/CKA/john.csr
+so we do this 
+open a csr.yaml file
+vi csr.yaml and paste the csr from documentation
+cat /root/CKA/john.csr | tr -d "\n"
+### hard one needs to be redone#########
+
+
+##################
+############
+
+kubectl run nginx-resolver --image=nginx
+kubectl expose pod nginx-resolver --name nginx-resolver-service --port 80
+
+kubectl get svc
+kubectl get pods
+
+kubectl run dns --image=busybox --command sleep 3600
+kubectl exec dns --  nslookup nginx-resolver-service > /root/CKA/nginx.svc
+
+kubectl exec dns --  nslookup nginx-resolver-service > /root/CKA/nginx.pod
+
+kubectl exec dns --  nslookup nginx-resolver
+
+kubectl get pods -owide
+
+kubectl exec dns --- nslookup 10-244-192-4.default.pod.cluster.local
+
+
+### hard one needs to be redone###
+###########@@@@@@@@@@@@@ #############@@@@@@@@@@@@@
+ssh node01
+kubectl run --image=nginx nginx-critical --dry-run=client -oyaml > 8static.yaml
+vi 8static.yaml
+cd /etc/kubernetes/manifests/
+crictl ps 
+
+###@@@@@ end of exam@@@@@@#########
+
+
+
+
+
