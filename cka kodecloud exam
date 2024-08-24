@@ -44,6 +44,28 @@ deployment hr-web-app: type of resource to expose in this case deployment by thi
 --target-port=80 specifies pods where the application is running, service will forward traffic from the --port to this --target
 --node-port=30082 the port on each node that the service will use, you will access your application at this port on any node in your cluster 
 
-kubectl describe pod orange
-kubectl edit pod orange
-kubectl apply -f orange.txt
+
+kube apply -f service-to-app-port-expose.yaml
+
+#######@@@@@@@@@ @@@@@@@@@@#####################
+kubectl get nodes
+kubectl get nodes -ojsonpath={.items[].status.nodeInfo.osImage} > /opt/outputs/nodes_os.txt
+
+
+####@@@@@@@@@   ##############@@@@@@@@@@@@@@
+vi pv.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv=analytics
+spec:
+  capacity:
+    storage: 100ML
+  volumeMode:
+  accessModes:
+    -ReadWritemany
+ hostpath:
+    path: "/pv/data-analytics"
+
+kubectl apply -f pv..yaml
+kubectl get pv
