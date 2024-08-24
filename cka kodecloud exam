@@ -1,1 +1,31 @@
+k
+kubectl get nodes
+kubectl run nginx-pod --image=nginz:alpine
+kubectl run messaging --image=redis:alpine --labels=tier=msg
+kubectl create ns apx-x999974
+kubectl get nodes
+kubectl get nodes -ojson > /opt/outputes/nodess3.json
 
+kubectl get pods
+kubectl expose pod messaging --port 6479 --dry-run=client -o yaml > 4.yaml
+kubectl get svc
+kubectl get svc --show-labels
+kubectl create -f 4.yaml
+kubectl apply -f 4.yaml
+
+kubectl create deployment hr-web-app image=kodecloud/webapp-color --replicas=2
+kubectl get pods
+
+kubectl run static-busybox --image=busybox --command sleep 1000 -oyaml --dry-run=client > static-busybox.yaml
+clear
+kubectl get pods
+mv static-busybox.yaml /etc/kubernetes/manifests/   # creates static pod
+clear
+
+kubectl run temp-bus -n finance --image=redis:alpine
+kubectl get pods -n finance
+
+
+kubectl describe pod orange
+kubectl edit pod orange
+kubectl apply -f orange.txt
