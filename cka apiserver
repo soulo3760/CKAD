@@ -7,7 +7,12 @@ so check api server logs
 check status of core compoenents such as api server k get pods - n kube-system
 
 
+PARTS OF A POD
+  One or more containers 
+  shared ip address
+  one namespace 
 
+BASICS OF KUBERNETES
 
 In its simplest form, Kubernetes is made of control plane nodes (aka cp nodes) and worker nodes, once called minions. We will see in a follow-on chapter how you can actually run everything on a single node for testing purposes. The cp runs an API server, a scheduler, various controllers and a storage system to keep the state of the cluster, container settings, and the networking configuration.
 
