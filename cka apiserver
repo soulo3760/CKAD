@@ -1,0 +1,7 @@
+kubectl -n kube-system get pod  # get list of pods within the kube-system namespace 
+Api server is the central control plane component that manages the state of the cluster.
+it handles requests from kubectl client and others to perform
+listing pods, creating deployments and scaling services.  
+so if api server is not functioning correctly kubectl will be unable to communicate. 
+so check api server logs 
+check status of core compoenents such as api server k get pods - n kube-system
