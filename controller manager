@@ -1,0 +1,4 @@
+it is the orchestrator
+if deployment scales up, CM creates new pods that are allocated to the nodes 
+ensures desired state of the cluster is maintained. 
+  
